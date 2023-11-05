@@ -40,8 +40,8 @@ export default function SignInSide() {
     const password = data.password;
 
     try {
-      const response = await axios.get(`/user/check`, {
-        params: { email, password },
+      const response = await axios.post(`/user/login`, {
+        body: { email, password },
       });
       addloggedDetails(data);
       navigate("/dashboard");
@@ -49,7 +49,7 @@ export default function SignInSide() {
       if (response.status === 200) {
         addloggedDetails(response.data);
         localStorage.setItem("userEmail", response.data.user.email);
-        console.log("email :", response.data.user.email);
+        console.log("email :", response.data);
         
         navigate("/dashboard");
       } else if (response.status === 404) {

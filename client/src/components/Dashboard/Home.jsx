@@ -33,14 +33,14 @@ function Home() {
 
   useEffect(() => {
     getUserDetailsByemail();
-  }, []);
+  }, [userDetailsDb]);
 
   // function or in login page we can keep the userdetails in context
   // in loggedDetails will get all the name, user diseases names
   async function getUserDetailsByemail() {
     try {
       let email = localStorage.getItem("userEmail");
-      const response = await axios.get(`/user/${email}`);
+      const response = await axios.get(`/user/email/${email}`);
 
       if (response.status === 200) {
         console.log("User exists:", response.data.user);

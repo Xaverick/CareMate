@@ -1,54 +1,49 @@
 const User = require("../models/User");
+const jwt = require('jsonwebtoken');
+const bcrypt = require('bcryptjs');
 
 async function createUser(req, res) {
-  try {
-    const userData = req.body;
-    console.log("req :", req.body);
-    const newUser = new User(userData);
-    await newUser.save();
+  let { name, email, password, userDiseases} = req.body;
+  email = email.toLowerCase();
+  const registeredEmail = await User.findOne({email: email});
 
-    res
-      .status(201)
-      .json({ message: "User created successfully", user: newUser });
-  } catch (error) {
-    console.error("Error creating user:", error);
-    res
-      .status(500)
-      .json({ error: "An error occurred while creating the user" });
+  if(registeredEmail){
+      res.status(400).json('email already exists');
+  }
+
+  else{
+      const salt = bcrypt.genSaltSync(10);
+      const hash = bcrypt.hashSync(password, salt);
+      await User.create({name, email, password: hash});
+      res.json('register');
   }
 }
 
 async function verifyUser(req, res) {
-  const { email, password } = req.query;
-
-  try {
-    const user = await User.findOne({ email, password });
-
-    if (!user) {
-      res.status(404).json({ message: "User not found" });
-    } else {
-      res.status(200).json({ user });
-    }
-  } catch (error) {
-    console.error("Error checking user:", error);
-    res.status(500).json({ error: "An error occurred while checking user" });
+  let { email, password } = req.body;
+  if(!email || !password) res.status(400).json('missing fields');
+  else{
+      email = email.toLowerCase();
+      const user = await User.findOne({ email: email});
+      if(user && bcrypt.compareSync(password, user.password)) {
+          const token = jwt.sign({ id: user._id }, `${process.env.SECRET}`, { expiresIn: '1h' });
+          res.cookie('jwt', token, { signed: true,httpOnly: true ,maxAge: 1000 * 60 * 60 }).json('login');
+      } 
+      else {
+          res.status(400).json('login failed');
+      }
   }
 }
 
 async function getUserDetailsByemail(req, res) {
-  const { email } = req.params;
-  console.log("emak :", email);
-  try {
-    const user = await User.findOne({ email });
-
-    if (!user) {
-      res.status(404).json({ message: "User not found" });
-    } else {
-      res.status(200).json({ user });
-    }
-  } catch (error) {
-    console.error("Error checking user:", error);
-    res.status(500).json({ error: "An error occurred while checking user" });
+  const token = req.signedCookies.jwt;
+  if(token){
+      const decoded = jwt.verify(token, `${process.env.SECRET}`);
+      const user = await User.findById(decoded.id);
+      res.json(user);
+  }
+  else{
+      res.status(400).json('no token');
   }
 }
 

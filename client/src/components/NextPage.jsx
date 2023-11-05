@@ -3,13 +3,13 @@ import { QuestionLayout } from "./QuestionLayout";
 import { useUserContext } from "../context/UserContext";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
+import ProgressBar from "./ProgressBar2";
 
 function NextPage() {
   const [firstResponses, setFirstResponses] = useState([]);
   const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0);
   const { adduserDetails, userDetails } = useUserContext();
   const navigate = useNavigate();
-
   const questions = [
     {
       question: "What are your current diseases?",
@@ -46,26 +46,9 @@ function NextPage() {
   ];
 
   const handleNextQuestion = () => {
-    if (currentQuestionIndex === 0) {
-      setFirstResponses([])
-      // setFirstResponses((prevResponses) => [...prevResponses, response]);
-      // console.log("res :", response, "firs :", firstResponses);
-    }
+
     if (currentQuestionIndex < questions.length - 1) {
       setCurrentQuestionIndex(currentQuestionIndex + 1);
-    }
-  };
-
-  const handlePreviousQuestion = () => {
-    if (currentQuestionIndex > 0) {
-      setCurrentQuestionIndex(currentQuestionIndex - 1);
-    }
-  };
-
-  const handleResponse = (response) => {
-    if (currentQuestionIndex === 0) {
-      setFirstResponses((prevResponses) => [...prevResponses, response]);
-      console.log("res :", response, "firs :", firstResponses);
     }
   };
 
@@ -82,15 +65,8 @@ function NextPage() {
   }
 
   const handleFinishTest = () => {
-    // const userdata = {
-    //   email: userDetails.email,
-    //   password: userDetails.password,
-    //   name: userDetails.name,
-    //   userDiseases: firstResponses,
-    // };
-    // console.log(userdata);
-    // adduserDetails(userdata);
-    console.log("user :",userDetails)
+    console.log("user :",userDetails);
+    localStorage.setItem("userEmail", userDetails.email);
     handleAxiosSubmit(userDetails);
   };
 
@@ -113,18 +89,13 @@ function NextPage() {
           </span>
         </div>
         <div>
-          {currentQuestionIndex > 0 && (
-            <button className="btn" onClick={handlePreviousQuestion}>
-              Previous Question
-            </button>
-          )}
           {currentQuestionIndex === questions.length - 1 ? (
             <button className="btn" onClick={handleFinishTest}>
-              Finish Test
+              Finish 
             </button>
           ) : (
             <button className="btn" onClick={() => handleNextQuestion()}>
-              Next Question
+              Next 
             </button>
           )}
         </div>
@@ -133,9 +104,6 @@ function NextPage() {
       <QuestionLayout
         question={questions[currentQuestionIndex].question}
         options={questions[currentQuestionIndex].options}
-        onOptionSelect={(res)=>{
-          console.log("optio :",res)
-        }}
       />
     </>
   );

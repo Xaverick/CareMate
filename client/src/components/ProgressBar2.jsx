@@ -6,6 +6,11 @@ export default function ProgressBar({ questions }) {
   const question = questions[currentQuestionIndex];
 
   const updateFn = () => {
+    if(currentQuestionIndex === 0) {
+      console.log('first question')
+      setCurrentQuestionIndex(currentQuestionIndex + 1);
+      
+    }
     if (currentQuestionIndex < questions.length - 1) {
       setCurrentQuestionIndex(currentQuestionIndex + 1);
     }
