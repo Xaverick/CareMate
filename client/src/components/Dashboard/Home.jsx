@@ -3,7 +3,12 @@ import React, { useEffect,useState } from "react";
 import { CircularProgressbar, buildStyles } from "react-circular-progressbar";
 import "react-circular-progressbar/dist/styles.css";
 import { BarChart } from "@mui/x-charts/BarChart";
-import badge1 from "../../assets/badge1.png";
+import b1 from "../../assets/B1.jpg";
+import b2 from "../../assets/B2.jpg";
+import b3 from "../../assets/B3.jpg";
+import b4 from "../../assets/B4.jpg";
+import b5 from "../../assets/B5.jpg";
+import b6 from "../../assets/B6.jpg";
 import fire from "../../assets/fire.png";
 import axios from "axios";
 import { useUserContext } from "../../context/UserContext";
@@ -104,7 +109,7 @@ function Home() {
     <main className="main-container">
       <div className="blue">
       <div className="main-title">
-        <h3>Hi {userDetailsDb.name}</h3>
+        <h3>Hello {userDetailsDb.name}</h3>
       </div>
 
       <div className="upper-section">
@@ -157,46 +162,50 @@ function Home() {
           />
           <div className="content"></div>
         </div>
-
-        <div className="group">
+<div className="group">
           <div className=" badges">
             <h3>Badges</h3>
+            <div className="icons">
             <div className="badge">
-              <img src={badge1} alt="" />
+              <img src={b2} alt="" />
             </div>
+            <div className="badge"> <img src={b4} alt="" /></div>
+              <div className="badge"><img src={b1} alt="" /></div>
+              <div className="badge"><img src={b5} alt="" /></div>
+              <div className="badge"><img src={b3} alt="" /></div>
+              </div>
             <div className="icons">
               <div className="badge">
-                <img src={badge1} alt="" />
+                <img src={b2} alt="" />
               </div>
               <div className="badge">
-                <img src={badge1} alt="" />
+                <img src={b3} alt="" />
               </div>
               <div className="badge">
-                <img src={badge1} alt="" />
+                <img src={b4} alt="" />
               </div>
               <div className="badge">
-                <img src={badge1} alt="" />
+                <img src={b5} alt="" />
               </div>
               <div className="badge">
-                <img src={badge1} alt="" />
+                <img src={b6} alt="" />
               </div>
-              <div className="badge"></div>
-              <div className="badge"></div>
-              <div className="badge"></div>
-              <div className="badge"></div>
-              <div className="badge"></div>
+              
             </div>
           </div>
           <div className="Graph streak">
             <h3>Streak</h3>
             <div className="count">
               <img src={fire} alt="Streakfire" />
-              <h4>4</h4>
+              <h4>3</h4>
             </div>
           </div>
         </div>
       </div>
     </div>
+
+     
+  
       <div className="mid-section">
         <div className="notes">
           <textarea
@@ -204,7 +213,7 @@ function Home() {
             id="notes"
             cols="30"
             rows="10"
-            placeholder="write a note"
+            placeholder="Share Your Daily Journey - How did you feel physically and mentally today? Your insights help you track your well-being and make progress..."
           ></textarea>
         </div>
 

@@ -5,6 +5,7 @@ var bodyParser = require("body-parser");
 const cors = require("cors");
 require("dotenv").config();
 const port = process.env.PORT || 3030;
+const reminder = require("./cron-jobs/remainder");
 
 const router = require("./router");
 
