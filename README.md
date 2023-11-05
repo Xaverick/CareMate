@@ -1,7 +1,7 @@
 
 # CareMate
 
-CareMate is a user-friendly and gamified healthcare app designed to help individuals manage their daily health and wellness effectively. Whether you're dealing with a specific health condition like diabetes or simply want to stay in shape, CareMate is your personalized, daily companion to track, improve, and maintain your well-being.
+CareMate is a user-friendly and gamified healthcare app designed to help individuals manage their daily health and wellness effectively. Whether you're dealing with a specific health condition like diabetes, thyroid etc... or simply want to stay in shape, CareMate is your personalized, daily companion to track, improve, and maintain your well-being.
 
 With a focus on user engagement and gamification, CareMate makes health management enjoyable. Set and track daily goals, complete challenges, and earn rewards as you work towards your health objectives. From monitoring blood sugar levels to adhering to dietary plans, our app guides and motivates you every step of the way.
 
