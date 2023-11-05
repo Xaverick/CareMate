@@ -3,7 +3,7 @@ const jwt = require('jsonwebtoken');
 const bcrypt = require('bcryptjs');
 
 async function createUser(req, res) {
-  let { name, email, password, userDiseases} = req.body;
+  let { name, email, password} = req.body;
   email = email.toLowerCase();
   const registeredEmail = await User.findOne({email: email});
 

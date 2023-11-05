@@ -53,15 +53,16 @@ function NextPage() {
   };
 
   function handleAxiosSubmit(userDetails) {
-    axios
-      .post("/user/create", userDetails)
-      .then((response) => {
-        console.log(response.data.message);
-        navigate("/dashboard");
-      })
-      .catch((error) => {
-        console.error("Error creating user:", error);
-      });
+    // axios
+    //   .post("/user/create", userDetails)
+    //   .then((response) => {
+    //     console.log(response.data.message);
+    //     navigate("/dashboard");
+    //   })
+    //   .catch((error) => {
+    //     console.error("Error creating user:", error);
+    //   });
+    navigate("/dashboard");
   }
 
   const handleFinishTest = () => {
